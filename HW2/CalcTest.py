@@ -1,9 +1,5 @@
 import unittest
-import coverage
 from Calc import Calculator  # The class we are going to implement
-
-cov = coverage.Coverage()
-cov.start()
 
 class TestCalculator(unittest.TestCase):
     def setUp(self):
@@ -35,9 +31,5 @@ class TestCalculator(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.calc.divide(5, 0)
 
-cov.stop()
-cov.save()
-
 if __name__ == "__main__":
-    #unittest.main(verbosity=2)
-    cov.html_report()
+    unittest.main(verbosity=2)
