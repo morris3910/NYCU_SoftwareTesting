@@ -21,4 +21,5 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest --maxfail=1 --disable-warnings -q
+          cd HW2
+          pytest CalcTest.py --maxfail=1 --disable-warnings -q
