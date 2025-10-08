@@ -1,5 +1,5 @@
-class Calculator:
-    def _validate_and_cast(self, a, b):
+def validate_operands(func):
+    def wrapper(self, a, b):
         if isinstance(a, bool) or isinstance(b, bool):
             raise TypeError("Unsupported operand type: bool not allowed")
         try:
@@ -7,22 +7,25 @@ class Calculator:
             b = float(b)
         except (TypeError, ValueError):
             raise TypeError("Unsupported operand type")
-        return a, b
+        if func.__name__ == "divide" and b == 0:
+            raise ValueError("Cannot divide by zero")
+        return func(self, a, b)
+    return wrapper
 
+
+class Calculator:
+    @validate_operands
     def add(self, a, b):
-        a, b = self._validate_and_cast(a, b)
         return a + b
 
+    @validate_operands
     def subtract(self, a, b):
-        a, b = self._validate_and_cast(a, b)
         return a - b
 
+    @validate_operands
     def multiply(self, a, b):
-        a, b = self._validate_and_cast(a, b)
         return a * b
 
+    @validate_operands
     def divide(self, a, b):
-        a, b = self._validate_and_cast(a, b)
-        if b == 0:
-            raise ValueError("Cannot divide by zero")
         return a / b
