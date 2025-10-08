@@ -17,9 +17,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -U pytest
+          pip install -U pytest coverage flake8
 
-      - name: Run tests
+      - name: Run static analysis (flake8)
         run: |
+          echo " Running flake8... "
+          flake8 HW2 --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 HW2 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Run tests with coverage
+        run: |
+          echo " Running tests with coverage... "
           cd HW2
-          pytest CalcTest.py --maxfail=1 --disable-warnings -q
+          coverage run -m pytest CalcTest.py --maxfail=1 --disable-warnings -q
+          coverage report -m

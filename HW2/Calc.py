@@ -1,9 +1,7 @@
 class Calculator:
     def _validate_and_cast(self, a, b):
-
         if isinstance(a, bool) or isinstance(b, bool):
             raise TypeError("Unsupported operand type: bool not allowed")
-
         try:
             a = float(a)
             b = float(b)
