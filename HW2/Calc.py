@@ -24,7 +24,7 @@ class Calculator:
 
     @validate_operands
     def multiply(self, a, b):
-        return a + b
+        return a * b
 
     @validate_operands
     def divide(self, a, b):
